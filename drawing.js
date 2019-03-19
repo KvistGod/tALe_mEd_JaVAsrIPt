@@ -39,7 +39,7 @@ function setup() {
             this.y = this.y < 0 ? 0 : this.y > height ? height : this.y;
         }
     }
-    console.log("Pen findes, og den x værdi er: " + pen.x);
+    console.log("Pen findes, og dens x værdi er: " + pen.x);
 }
 
 function draw() {
@@ -47,6 +47,17 @@ function draw() {
     if(direction == "right") pen.x += 1;
     if(direction == "up") pen.y -= 1;
     if(direction == "down") pen.y += 1;
+    if(direction == "hus"){
+        if (!houseDrawing){
+            houseDrawing = true;
+            timer = millis();
+        }
+        let time = millis() - timer;
+
+        if (time < 500){
+        pen.y --;
+        }
+    }
     pen.bounce();
     pen.show();
 }
@@ -81,6 +92,10 @@ function showResult() {
                 break;
             case 'lille':
             pen.size -= 8;
+                break;
+            case 'hus':
+            case 'ups':
+            direction = "hus"
                 break;
             default:
             direction = "stop"
